@@ -2,7 +2,7 @@
 % short script to simulate sound pressure level trend 
 % for given amount of microphones in a room 
 % sources are simulated for each x,y and z coordinate in the room 
-%
+% Test
 %--------------------------------------------------------------------------
 
 clear all;
