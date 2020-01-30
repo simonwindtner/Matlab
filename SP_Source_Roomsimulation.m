@@ -20,9 +20,9 @@ Z_cs = 1 * 10;
 %% meshgrid to simulate source positions
 %  radius will be referenced to the mid radius of the room r(0.5,0.5,0.5)
 %  SPL is simulated for each microphone seperatley 
-[X,Y,Z] = meshgrid(0:.01:1 * roomscale);
+[X,Y,Z] = meshgrid(0:.1:1 * roomscale);
 SPL = X;
-SPL = -100;
+SPL(:,:,:) = -100;
 for Z_cs = 1:10
     for n = 1:length(mic_x)
         dx = X - mic_x(n);  
