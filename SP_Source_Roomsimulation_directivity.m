@@ -23,15 +23,17 @@ mic_z = [.5, .5, .5, .5];
 % mic_direction is seen like this
 % Y
 % 1   --------------------------------
-%    |     + ----> 0°C <---- -        |
+%    |     + <---- 0° ----> -         |
 %    |                                |
 %    |         \   |   /              |
 %    |          \  |  /               |
 %    |             x                  |
 %    |                                |
 % 0   --------------------------------
+% X  0                                1  
 mic_direction = [30, 0, 0, -30];
 
+% folowing parameters can be changed:
 % roomscale -> size of room (standard: 1x1x1)
 roomscale = 1;
 % gridscale -> points of meshgrid resolutions
@@ -40,7 +42,8 @@ gridscale = 0.01;
 Z_level = 1 / gridscale;
 
 
-%% meshgrid to simulate source positions
+%% Simulation algorithm
+%  meshgrid to simulate source positions
 %  SPL is simulated for each microphone seperatley 
 
 % preallocation of meshgrid and vectors
@@ -91,7 +94,7 @@ for Z_level = 1:1:Z_level
         SPL = max(SPL,SPL_radius);
         SPL_total = SPL + SPL_cardioid_char_total;
     end
-    % surfaceplot of SPL over X,Y for current Z - level
+    % surfaceplot of SPL over X,Y and for current Z - level
     temp = figure(Z_level)
     surf(X(:,:,Z_level),Y(:,:,Z_level),SPL_total(:,:,Z_level));
     xlabel('X')
@@ -109,7 +112,7 @@ for Z_level = 1:1:Z_level
         p1 = [(mic_x(n) - tand(mic_direction(n) * 0.25)) (mic_y(n) + .25) 0.0];
         vectarrow(p0,p1);
     end
-    
+%% Exporting of Plots    
 % for exporting the plots storage path has to be adapted
      title(['SPL trend for Z - level ' num2str(Z_level * gridscale)])
 %     print(temp, '-djpeg' , ['/Users/simonwindtner/Documents/ET-TI/SMA/Ensemble/'...
